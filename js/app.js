@@ -39,7 +39,7 @@ return vertIdx;
 /*------------Ship Objects--------------*/
 
 function shipYard() {
-    for(var i = 0; i < 4; i++){
+    for(var i = 0; i < 2; i++){
         var randomNum1 = getRow()
         var randomNum2 = getColumn();
 
@@ -67,8 +67,10 @@ function shipYard() {
           shipOne: [],
           shipTwo: [],
       },
+      hits: {
       hitsOne: [],
       hitsTwo: []
+      }
   }
 /*------------End Ship Object--------------*/
 
@@ -76,7 +78,7 @@ function init() {
     for (i = 0; i < cells.length; i++) {
         cells[i].addEventListener('click', handleClick);
     };
-    board = new Array(49).fill(null);
+    shipYard();
 }
 
 
@@ -88,33 +90,38 @@ init();
 //Functions
 
 function checkWinner() {
-    if (hitCount === 3) {
+    if (hitCount === 6) {
         alert('winner');
-    } else if (hitCount !== 3) {
+    } else if (hitCount !== 6) {
         return;
     }
 }
 
 function testHit() {
-    for (i = 0; i < ships.locations.length; i++) {
-        if (ships.locations.includes(guess)) {
+     
+        if (ships.locations.shipOne.includes(guess)) {
             hit = true;
-            ships.hits[guess] = "hit";
-            console.log(ships.hits, ships.hits.length);
+            ships.hits.hitsOne.push('hit');
+            console.log(ships.hitsOne)
+         } else if(ships.locations.shipTwo.includes(guess)) {
+             hit = true;
+             ships.hits.hitsTwo.push("hit");
         } else {
             hit = false;
+        } if (hit = true) {
+            hitCount++;
         }
-    } if (hit === true) {
-        hitCount++;
     }
     
-    console.log(ships.locations);
-}
+
 
 function shipSunk() {
-    if (ships.hits.length === 4) {
-        sunkenShips ++;
-        alert('Ship Sunk!');
+    if (ships.hits.hitsOne.length === 3) {
+        //sunkenShips ++;
+        //alert('Ship Sunk!');
+    }else if (ships.hits.hitsTwo.length === 3) {
+        // sunkenShips ++;
+        // alert('Ship Sunk!');
     }
 }
 
