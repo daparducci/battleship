@@ -46,6 +46,8 @@ function shipYard() {
 
         if(randomNum2 === randomNum1 || randomNum2 === randomNum1 + 1 || randomNum2 === randomNum1  + 2){
             randomNum2 = getRow()
+        } else if(randomNum2 + 1 === randomNum1 || randomNum2 + 2 === randomNum1) {
+          randomNum2 = getRow;
         }
     }
     ships.locations.shipOne = [randomNum1, randomNum1 + 1, randomNum1 + 2];
