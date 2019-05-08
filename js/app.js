@@ -103,9 +103,20 @@ function testHit() {
         ships.hits.hitsOne.sort(function(a, b) {
             return a - b;
         })
+        if (ships.hits.hitsOne.length === 3) {
+            alert('ship sunk');
+        }
     } else if (ships.locations.shipTwo.includes(guess)) {
         hit = true;
+        prevGuesses.push(guess);
+        hitCount += 1;
         ships.hits.hitsTwo.push(guess);
+        ships.hits.hitsTwo.sort(function(a, b){
+            return a - b;
+        })
+        if (ships.hits.hitsTwo.length === 3) {
+            alert('ship sunk');
+        }
     } else {
         hit = false;
     }
@@ -119,10 +130,10 @@ function shipSunk() {
     
     if (ships.hits.hitsOne === ships.locations.shipOne) {
         sunkenShips++;
-        alert('Ship Sunk!');
+       // alert('Ship Sunk!');
     } else if (ships.hits.hitsTwo.length === 3) {
         sunkenShips++;
-        alert('Ship Sunk!');
+        //alert('Ship Sunk!');
     }
 }
 
