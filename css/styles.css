@@ -5,6 +5,11 @@
   body {
     /* height: 100vh; */
     margin: 40px;
+    background-image: url('https://www.publicdomainpictures.net/pictures/160000/nahled/green-raster-black-background.jpg');
+    background-repeat: no-repeat, repeat;
+    background-color: black;
+    background-position: center;
+    background-size: cover;
     /* display: flex; */
     /* flex-direction: column; */
     /* justify-content: center;
@@ -19,7 +24,7 @@
     align-self: center; */
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: "header header header"
-                         "box-1 game-board game-board"
+                         "box-1 game-board ."
                          "footer footer footer";
 }
 .header {
@@ -28,6 +33,7 @@
     text-align: center;
     /* background-color: red; */
     justify-content: center;
+    color: red;
 }
 
 .footer {
@@ -39,7 +45,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-color: blue;
+    color: red;
     grid-area: box-1;
     text-align: center;
     list-style: none;
@@ -64,8 +70,10 @@
 
 .hit {
     background-color: red;
+    border: 2px solid black;
 }
 
 .miss {
-    background-color: white;
+    background-color: black;
+    border: 2px solid red;
 }
