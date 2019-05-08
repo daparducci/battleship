@@ -10,6 +10,7 @@
     background-color: black;
     background-position: center;
     background-size: cover;
+    font-family: 'Press Start 2P', cursive;
     /* display: flex; */
     /* flex-direction: column; */
     /* justify-content: center;
@@ -23,21 +24,24 @@
     /* justify-items: center;
     align-self: center; */
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "header header header"
-                         "box-1 game-board ."
+    grid-template-areas: ". header box-1"
+                         ". game-board ."
                          "footer footer footer";
 }
 .header {
-    /* grid-area: header; */
-    grid-column: span 3;
+    grid-area: header;
+    grid-column: 2/3;
     text-align: center;
     /* background-color: red; */
     justify-content: center;
-    color: red;
+    color: #56BE3C;
 }
 
 .footer {
     grid-area: footer;
+    display: flex;
+    
+    justify-content: center;
 }
 
 .box-1 {
@@ -45,9 +49,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    color: red;
+    color: #56BE3C;
     grid-area: box-1;
-    text-align: center;
+    text-align: left;
     list-style: none;
 }
 
@@ -64,16 +68,42 @@
 
 .cells {
     background-color: grey;
-    border: 2px solid red;
+    border: 2px solid #97F665;
 
 }
 
 .hit {
-    background-color: red;
-    border: 2px solid ;
+    background-color: black;
+    border: 2px solid #97F665;
+    background-image: url('../css/images/icons8-explosion-48.png');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .miss {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: black;
-    border: 2px solid red;
+    color: #97F665;
+    border: 2px solid #97F665;
+    font-size: 10px;
 }
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border: 2px solid #97F665;
+    border-radius: 5px;
+    font-family: 'Press Start 2P', cursive;
+    color: black;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: grey;
+}
+
+@media 

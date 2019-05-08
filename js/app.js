@@ -3,7 +3,8 @@ var msgElem = document.getElementById('msg');
 var liAmmo = document.getElementById('ammo');
 var liHits = document.getElementById('hits');
 var liShipsSunk = document.getElementById('ships-sunk');
-var hit = null;
+document.getElementById("my-button").addEventListener('click', restart);
+
 
 //Variables//
 let board = [
@@ -15,29 +16,25 @@ let board = [
     [35, 36, 37, 38, 39, 40, 41],
     [42, 43, 44, 45, 46, 47, 48]
 ];
-let guess, square;
-let hitCount = 1;
-let ammo = 20;
-let sunkenShips = 0;
-let prevGuesses = [];
+let guess, square, hitCount, ammo, sunkenShips, prevGuesses, hit;
+// let hitCount = 0;
+// let ammo = 20;
+// let sunkenShips = 0;
+// let prevGuesses = [];
 
 /*------------Ship Object--------------*/
 
 var ships = {
     locations: {
-        shipOne: [],
-        shipTwo: [],
-    },
+        },
     hits: {
-        hitsOne: [],
-        hitsTwo: []
-    }
+        }
 }
 /*------------End Ship Object--------------*/
 
+init();
 
-
-
+/*--------------------------Get Row-------------------------*/
 function getRow() {
     var randomNum1 = Math.floor(Math.random() * (5));
     var randomNum2 = Math.floor(Math.random() * (12 - 7) + 7);
@@ -49,49 +46,30 @@ function getRow() {
     return horizontalStart;
 }
 
-//Get Vertical Starting Index Value
+/*-----------------------Get Column--------------------------*/
 function getColumn() {
     var idx = Math.floor(Math.random() * (5));
     var vertIdx = board[idx][Math.floor(Math.random() * (7))];
     return vertIdx;
 }
 
-//Generate Ships
+/*------------------Generate Ships----------------------*/
 
 function shipYard() {
     for (var i = 0; i < 2; i++) {
         var randomNum1 = getRow()
         var randomNum2 = getColumn();
             while (randomNum1 === randomNum2 || randomNum1 === randomNum2 + 7 || randomNum1 === randomNum2 + 14 || randomNum1 + 1 === randomNum2 || randomNum1 + 1 === randomNum2 + 7 || randomNum1 + 1 === randomNum2 + 14 || randomNum1 + 2 === randomNum2 || randomNum1 + 2 === randomNum2 + 7 || randomNum1 + 2 === randomNum2 + 14) {
-               
-                randomNum2 = getColumn();
-                // randomNum1 = getRow();
+               randomNum2 = getColumn();
             } 
-        // checkColumn()
-    }
+        }
     ships.locations.shipOne = [randomNum1, randomNum1 + 1, randomNum1 + 2];
     ships.locations.shipTwo = [randomNum2, randomNum2 + 7, randomNum2 + 14];
     console.log('random1: ', ships.locations.shipOne);
     console.log('random2: ', ships.locations.shipTwo);
 }
-
-
-
-function init() {
-    for (i = 0; i < cells.length; i++) {
-        cells[i].addEventListener('click', handleClick);
-    };
-    shipYard();
-    msgElem.innerText = "READY PLAYER ONE";
-    setTimeout(function() {
-        msgElem.innerText = ''    }, 2000)
-    liAmmo.innerText = `AMMO: ${ammo}`;
-}
-
-//Call Init
-init();
-//Functions
-
+/*---------------------------------------------------------------*/
+/*----------------Check Winner Function-------------*/
 function checkWinner() {
     if (ammo === 0) {
         msgElem.innerText = "GAME OVER";
@@ -109,7 +87,8 @@ function checkWinner() {
     }
     
 }
-
+/*---------------------------------------------------*/
+/*------------------Test Hit Function----------------*/
 function testHit() {
     if (prevGuesses.includes(guess)) {
         return;
@@ -117,13 +96,13 @@ function testHit() {
     if (ships.locations.shipOne.includes(guess)) {
         hit = true;
         prevGuesses.push(guess);
-        hitCount += 1;
+        hitCount ++;
         ships.hits.hitsOne.push(guess);
         ships.hits.hitsOne.sort(function(a, b) {
             return a - b;
         })
         if (ships.hits.hitsOne.length === 3) {
-            sunkenShips += 1;
+            sunkenShips ++;
             //giveMessage();
             msgElem.innerText = "SHIP SUNK";
             setTimeout(function() {
@@ -133,13 +112,13 @@ function testHit() {
     } else if (ships.locations.shipTwo.includes(guess)) {
         hit = true;
         prevGuesses.push(guess);
-        hitCount += 1;
+        hitCount ++;
         ships.hits.hitsTwo.push(guess);
         ships.hits.hitsTwo.sort(function(a, b){
             return a - b;
         })
         if (ships.hits.hitsTwo.length === 3) {
-            sunkenShips += 1;
+            sunkenShips ++;
             //giveMessage();
             msgElem.innerText = "SHIP SUNK";
             setTimeout(function() {
@@ -151,51 +130,64 @@ function testHit() {
         hit = false;
         document.getElementById(guess).innerText = "MISS!"
     }
-
-}
-
-
-
-function shipSunk() {
-   
     
-    // if (ships.hits.hitsOne === ships.locations.shipOne) {
-    //     sunkenShips++;
-    //    // alert('Ship Sunk!');
-    // } else if (ships.hits.hitsTwo.length === 3) {
-    //     sunkenShips++;
-    //     //alert('Ship Sunk!');
-    // }
 }
+/*-----------------------------------------------------------*/
+/*------------------Update Stats Function--------------------------*/
 
 function giveMessage() {
     var msgElem = document.getElementById('msg');
-    // msgElem.innerText = ;
     liHits.innerText = `HITS: ${hitCount}`
     liShipsSunk.innerText = `SHIPS SUNK: ${sunkenShips}`
-    
 }
+/*-----------------------------------------------------------*/
 
-function hits() {
+/*-----------------------Display Hit/Miss--------------------------*/
+function hitsDisplay() {
     if (hit === true) {
         square.setAttribute("class", "hit");
     } else if (hit === false) {
         square.setAttribute("class", "miss");
     };
 }
-
+/*------------------------Handle Click---------------------------*/
 function handleClick(evt) {
     guess = parseInt(evt.target.id);
     square = document.getElementById(evt.target.id);
     ammo -= 1;
     liAmmo.innerText = `AMMO: ${ammo}`;
-    giveMessage();
     testHit();
-    hits();
-    shipSunk();
+    giveMessage();
+    hitsDisplay();
     checkWinner();
-
 }
 
+/*-------------------------Init Function--------------------------*/
+function init() {
+    hit = null;
+    hitCount = 0;
+     ammo = 20;
+    sunkenShips = 0;
+    prevGuesses = [];
+    ships.locations.shipOne = [];
+    ships.locations.shipTwo = [];
+    ships.hits.hitsOne = [];
+    ships.hits.hitsTwo = [];
+    for (i = 0; i < cells.length; i++) {
+        cells[i].addEventListener('click', handleClick);
+        cells[i].setAttribute("class", "cells");
+        cells[i].innerHTML = '';
+    };
+    shipYard();
+    msgElem.innerText = "READY PLAYER ONE";
+    setTimeout(function() {
+        msgElem.innerText = ''    }, 2000);
+    liShipsSunk.innerText = `SHIPS SUNK: 0`;
+    liAmmo.innerText = `AMMO: ${ammo}`;
+    liHits.innerText = `HITS: 0`;
+}
 
+function restart() {
+    init();
+}
 
