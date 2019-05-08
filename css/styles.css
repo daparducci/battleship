@@ -3,21 +3,57 @@
   }
 
   body {
-    height: 100vh;
+    /* height: 100vh; */
+    margin: 40px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.wrapper {
+    display: grid;
+    grid-gap: 10px;
     margin: 0;
+    /* justify-items: center;
+    align-self: center; */
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "header header header"
+                         "box-1 game-board game-board"
+                         "footer footer footer";
+}
+.header {
+    /* grid-area: header; */
+    grid-column: span 3;
+    text-align: center;
+    /* background-color: red; */
+    justify-content: center;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+.box-1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    background-color: blue;
+    grid-area: box-1;
+    text-align: center;
+    list-style: none;
 }
 
 #game-board {
     height: 100vh;
     display: grid;
+    grid-area: game-board;
     grid-template-columns: repeat(7, 10vmin);
     grid-template-rows: repeat(7, 10vmin);
     grid-gap: 1vmin;
     align-content: center;
+    position: relative;
 }
 
 .cells {

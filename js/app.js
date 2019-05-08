@@ -1,5 +1,6 @@
 var cells = document.querySelectorAll('.cells');
 var msgElem = document.getElementById('msg');
+var liAmmo = document.getElementById('ammo');
 var hit = null;
 
 //Variables//
@@ -14,6 +15,7 @@ let board = [
 ];
 let guess, square;
 let hitCount = 0;
+let ammo = 20;
 let sunkenShips = 0;
 let prevGuesses = [];
 
@@ -77,6 +79,10 @@ function init() {
         cells[i].addEventListener('click', handleClick);
     };
     shipYard();
+    msgElem.innerText = "READY PLAYER ONE";
+    setTimeout(function() {
+        msgElem.innerText = ''    }, 2000)
+    liAmmo.innerText = `AMMO: ${ammo}`;
 }
 
 //Call Init
@@ -85,10 +91,13 @@ init();
 
 function checkWinner() {
     if (hitCount === 6) {
-        alert('winner');
+        msgElem.innerHTML = "CONGRATULATIONS PLAYER ONE!";
     } else if (hitCount !== 6) {
         return;
+    } else if (ammo === 0) {
+        msgElem.innerText = "GAME-OVER!"
     }
+    
 }
 
 function testHit() {
@@ -104,8 +113,11 @@ function testHit() {
             return a - b;
         })
         if (ships.hits.hitsOne.length === 3) {
-            alert('ship sunk');
-        }
+            msgElem.innerText = "SHIP SUNK";
+            setTimeout(function() {
+                msgElem.innerText = " ";
+            }, 3000);
+        } document.getElementById(guess).innerText = "HIT!"
     } else if (ships.locations.shipTwo.includes(guess)) {
         hit = true;
         prevGuesses.push(guess);
@@ -115,10 +127,15 @@ function testHit() {
             return a - b;
         })
         if (ships.hits.hitsTwo.length === 3) {
-            alert('ship sunk');
+            msgElem.innerText = "SHIP SUNK";
+            setTimeout(function() {
+                msgElem.innerText = " ";
+            }, 3000);
         }
+        document.getElementById(guess).innerText = "HIT!"
     } else {
         hit = false;
+        document.getElementById(guess).innerText = "MISS!"
     }
 
 }
@@ -153,6 +170,8 @@ function hits() {
 function handleClick(evt) {
     guess = parseInt(evt.target.id);
     square = document.getElementById(evt.target.id);
+    ammo -= 1;
+    liAmmo.innerText = `AMMO: ${ammo}`;
 
     testHit();
     hits();
