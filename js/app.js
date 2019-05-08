@@ -1,6 +1,8 @@
 var cells = document.querySelectorAll('.cells');
 var msgElem = document.getElementById('msg');
 var liAmmo = document.getElementById('ammo');
+var liHits = document.getElementById('hits');
+var liShipsSunk = document.getElementById('ships-sunk');
 var hit = null;
 
 //Variables//
@@ -14,7 +16,7 @@ let board = [
     [42, 43, 44, 45, 46, 47, 48]
 ];
 let guess, square;
-let hitCount = 0;
+let hitCount = 1;
 let ammo = 20;
 let sunkenShips = 0;
 let prevGuesses = [];
@@ -60,11 +62,12 @@ function shipYard() {
     for (var i = 0; i < 2; i++) {
         var randomNum1 = getRow()
         var randomNum2 = getColumn();
-        if (randomNum1 === randomNum2 || randomNum1 === randomNum2 + 7 || randomNum1 === randomNum2 + 14 || randomNum1 + 1 === randomNum2 || randomNum1 + 1 === randomNum2 + 7 || randomNum1 + 1 === randomNum2 + 14 || randomNum1 + 2 === randomNum2 || randomNum1 + 2 === randomNum2 + 7 || randomNum1 + 2 === randomNum2 + 14) {
-           
-            randomNum2 = getColumn();
-            randomNum1 = getRow();
-        }
+            while (randomNum1 === randomNum2 || randomNum1 === randomNum2 + 7 || randomNum1 === randomNum2 + 14 || randomNum1 + 1 === randomNum2 || randomNum1 + 1 === randomNum2 + 7 || randomNum1 + 1 === randomNum2 + 14 || randomNum1 + 2 === randomNum2 || randomNum1 + 2 === randomNum2 + 7 || randomNum1 + 2 === randomNum2 + 14) {
+               
+                randomNum2 = getColumn();
+                // randomNum1 = getRow();
+            } 
+        // checkColumn()
     }
     ships.locations.shipOne = [randomNum1, randomNum1 + 1, randomNum1 + 2];
     ships.locations.shipTwo = [randomNum2, randomNum2 + 7, randomNum2 + 14];
@@ -90,6 +93,13 @@ init();
 //Functions
 
 function checkWinner() {
+    if (ammo === 0) {
+        msgElem.innerText = "GAME OVER";
+        setTimeout(function(){
+            location.reload();
+        }, 2000);
+        
+    }
     if (hitCount === 6) {
         msgElem.innerHTML = "CONGRATULATIONS PLAYER ONE!";
     } else if (hitCount !== 6) {
@@ -113,6 +123,8 @@ function testHit() {
             return a - b;
         })
         if (ships.hits.hitsOne.length === 3) {
+            sunkenShips += 1;
+            //giveMessage();
             msgElem.innerText = "SHIP SUNK";
             setTimeout(function() {
                 msgElem.innerText = " ";
@@ -127,6 +139,8 @@ function testHit() {
             return a - b;
         })
         if (ships.hits.hitsTwo.length === 3) {
+            sunkenShips += 1;
+            //giveMessage();
             msgElem.innerText = "SHIP SUNK";
             setTimeout(function() {
                 msgElem.innerText = " ";
@@ -145,18 +159,21 @@ function testHit() {
 function shipSunk() {
    
     
-    if (ships.hits.hitsOne === ships.locations.shipOne) {
-        sunkenShips++;
-       // alert('Ship Sunk!');
-    } else if (ships.hits.hitsTwo.length === 3) {
-        sunkenShips++;
-        //alert('Ship Sunk!');
-    }
+    // if (ships.hits.hitsOne === ships.locations.shipOne) {
+    //     sunkenShips++;
+    //    // alert('Ship Sunk!');
+    // } else if (ships.hits.hitsTwo.length === 3) {
+    //     sunkenShips++;
+    //     //alert('Ship Sunk!');
+    // }
 }
 
 function giveMessage() {
     var msgElem = document.getElementById('msg');
-    msgElem.innerText = msg;
+    // msgElem.innerText = ;
+    liHits.innerText = `HITS: ${hitCount}`
+    liShipsSunk.innerText = `SHIPS SUNK: ${sunkenShips}`
+    
 }
 
 function hits() {
@@ -172,7 +189,7 @@ function handleClick(evt) {
     square = document.getElementById(evt.target.id);
     ammo -= 1;
     liAmmo.innerText = `AMMO: ${ammo}`;
-
+    giveMessage();
     testHit();
     hits();
     shipSunk();
