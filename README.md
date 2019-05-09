@@ -14,5 +14,5 @@ ____________
 
 ### Game Play
 
-![Player Start Screen](https://imgur.com/y0uhmcw)
+![Imgur](https://i.imgur.com/y0uhmcw.png)
  
