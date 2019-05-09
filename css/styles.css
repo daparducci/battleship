@@ -3,26 +3,19 @@
   }
 
   body {
-    /* height: 100vh; */
     margin: 40px;
     background-image: url('https://www.publicdomainpictures.net/pictures/160000/nahled/green-raster-black-background.jpg');
-    background-repeat: no-repeat, repeat;
-    background-color: black;
+    background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     font-family: 'Press Start 2P', cursive;
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: center;
-    align-items: center; */
+    display: flex;
 }
 
 .wrapper {
     display: grid;
     grid-gap: 10px;
     margin: 0;
-    /* justify-items: center;
-    align-self: center; */
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: ". header box-1"
                          ". game-board ."
@@ -32,7 +25,6 @@
     grid-area: header;
     grid-column: 2/3;
     text-align: center;
-    /* background-color: red; */
     justify-content: center;
     color: #56BE3C;
 }
@@ -106,4 +98,37 @@ button:hover {
     background-color: grey;
 }
 
-@media 
+ @media only screen and (max-width: 768px) {
+	body {
+      display: flex;
+      flex-direction: column;
+	 }
+    
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .header {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
+
+    .box-1 {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
+
+    #gameboard {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: column;
+    }
+}   

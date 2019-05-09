@@ -74,7 +74,7 @@ function checkWinner() {
     if (ammo === 0) {
         msgElem.innerText = "GAME OVER";
         setTimeout(function(){
-            location.reload();
+            init();
         }, 2000);
         
     }
