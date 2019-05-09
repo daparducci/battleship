@@ -1,3 +1,5 @@
+/*----------Cached Elements-----------*/
+
 var cells = document.querySelectorAll('.cells');
 var msgElem = document.getElementById('msg');
 var liAmmo = document.getElementById('ammo');
@@ -81,7 +83,6 @@ function checkWinner() {
     } else if (ammo === 0) {
         msgElem.innerText = "GAME-OVER!"
     }
-    
 }
 /*---------------------------------------------------*/
 /*------------------Test Hit Function----------------*/

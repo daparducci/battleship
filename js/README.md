@@ -10,9 +10,13 @@ ____________
 
 ### Start Screen
 
-![Player Start Screen](https://imgur.com/WI3uL36)
+![Imgur](https://i.imgur.com/WI3uL36.png)
 
 ### Game Play
 
-![Player Start Screen](https://imgur.com/y0uhmcw)
+![Imgur](https://i.imgur.com/y0uhmcw.png)
  
+### Technologies Used
+* Javascript
+* HTML
+* CSS
