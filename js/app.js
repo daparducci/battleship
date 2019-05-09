@@ -6,7 +6,7 @@ var liShipsSunk = document.getElementById('ships-sunk');
 document.getElementById("my-button").addEventListener('click', restart);
 
 
-//Variables//
+//---------------APP STATE VARIABLES----------------//
 let board = [
     [0, 1, 2, 3, 4, 5, 6],
     [7, 8, 9, 10, 11, 12, 13],
@@ -17,12 +17,6 @@ let board = [
     [42, 43, 44, 45, 46, 47, 48]
 ];
 let guess, square, hitCount, ammo, sunkenShips, prevGuesses, hit;
-// let hitCount = 0;
-// let ammo = 20;
-// let sunkenShips = 0;
-// let prevGuesses = [];
-
-/*------------Ship Object--------------*/
 
 var ships = {
     locations: {
@@ -30,9 +24,11 @@ var ships = {
     hits: {
         }
 }
-/*------------End Ship Object--------------*/
 
 init();
+
+/*------------------FUNTIONS-----------------*/
+
 
 /*--------------------------Get Row-------------------------*/
 function getRow() {
@@ -103,7 +99,6 @@ function testHit() {
         })
         if (ships.hits.hitsOne.length === 3) {
             sunkenShips ++;
-            //giveMessage();
             msgElem.innerText = "SHIP SUNK";
             setTimeout(function() {
                 msgElem.innerText = " ";
@@ -119,7 +114,6 @@ function testHit() {
         })
         if (ships.hits.hitsTwo.length === 3) {
             sunkenShips ++;
-            //giveMessage();
             msgElem.innerText = "SHIP SUNK";
             setTimeout(function() {
                 msgElem.innerText = " ";
