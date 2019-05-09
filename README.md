@@ -16,3 +16,12 @@ ____________
 
 ![Imgur](https://i.imgur.com/y0uhmcw.png)
  
+ ## Technologies Used
+ 
+ * Javascript
+ * HTML
+ * CSS
+ 
+ ## Next Steps
+ * Add more Ships
+ * Add Second Player
