@@ -10,7 +10,7 @@ ____________
 
 ### Start Screen
 
-![Player Start Screen](https://imgur.com/WI3uL36)
+[Imgur](https://i.imgur.com/WI3uL36.png)
 
 ### Game Play
 
