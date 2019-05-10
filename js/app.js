@@ -104,7 +104,7 @@ function testHit() {
             setTimeout(function() {
                 msgElem.innerText = " ";
             }, 3000);
-        } document.getElementById(guess).innerText = "HIT!"
+        } 
     } else if (ships.locations.shipTwo.includes(guess)) {
         hit = true;
         prevGuesses.push(guess);
@@ -120,7 +120,7 @@ function testHit() {
                 msgElem.innerText = " ";
             }, 3000);
         }
-        document.getElementById(guess).innerText = "HIT!"
+        
     } else {
         hit = false;
         document.getElementById(guess).innerText = "MISS!"
